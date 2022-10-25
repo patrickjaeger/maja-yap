@@ -1,4 +1,5 @@
 library(tidyverse)
+library(ggforce)
 source("geom_hpline.R")
 
 dpath <- "data/results_csv"
@@ -30,10 +31,17 @@ datl <- unnest(dat, data) %>%
 datl <- mutate(datl, stiffness = parse_number(stiffness) %>% as_factor())
 
 ggplot(datl, aes(stiffness, normalized_mean, color = stiffness)) +
-  # geom_jitter(width = 0.2) +
   geom_boxplot(show.legend = FALSE) +
   theme_classic() +
   scale_color_manual(values = c("black", "darkred")) +
+  labs(x = "PDMS hardness [kPa]",
+       y = "Nuc/Cyto YR")
+
+ggplot(datl, aes(stiffness, normalized_mean, color = stiffness)) +
+  geom_sina(pch = 16, show.legend = FALSE) +
+  stat_summary(fun.data = ~mean_sdl(., mult =1), geom = "pointrange", color = "black", show.legend = FALSE) +
+  theme_classic() +
+  scale_color_manual(values = c("gray50", "darkred")) +
   labs(x = "PDMS hardness [kPa]",
        y = "Nuc/Cyto YR")
   
