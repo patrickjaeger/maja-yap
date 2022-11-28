@@ -260,3 +260,33 @@ ggpubr::annotate_figure(fig,
 
 # ggsave("results/PFK/MW1-29_overview.svg",
        # width = 550, height = 400, dpi = 72, units = "px")
+
+
+
+# By sample ---------------------------------------------------------------
+
+# dat_sum <- dat_ratio %>% 
+#   group_by(across(1:4)) %>% 
+#   summarise(cell_count = n(),
+#             cyto_mean = mean(cyto_mean),
+#             nuc_mean = mean(nuc_mean),
+#             ratio_mean = mean(nuc_cyto_ratio))
+# 
+# 
+# ggplot(dat_sum, aes(treatment, ratio_mean, 
+#                     group = interaction(stiffness, treatment),
+#                     color = treatment)) +
+#   geom_jitter(pch = 16, width = 0.1, show.legend = FALSE) +
+#   stat_summary(fun.data = ~mean_sdl(., mult =1), 
+#                geom = "hpline", 
+#                color = "black", 
+#                show.legend = FALSE, 
+#                # cex = 1, 
+#                position = position_dodge(0.9)) +
+#   theme_classic() +
+#   facet_wrap(~stiffness, 
+#              labeller = labeller(stiffness = stiff_labs)) +
+#   scale_color_manual(values = c("gray50", "darkred")) +
+#   labs(x = "Drug treatment",
+#        # y = 'Cell count [n]'
+#        )
